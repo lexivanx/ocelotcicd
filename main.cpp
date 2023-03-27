@@ -5,30 +5,28 @@
 #include "deploy.h"
 
 int main() {
-    // Build project
-    std::string buildCommand = "make";
+    std::string buildCommand = "g++ -std=c++11 main.cpp -o main";
+    std::string testCommand = "./test";
+    std::string deployCommand = "scp main user@host:/path/to/deploy";
+
     if (buildProject(buildCommand)) {
-        std::cout << "Build successful!" << std::endl;
-    } else {
-        std::cout << "Build failed!" << std::endl;
-        return 1;
-    }
+        std::cout << "Build succeeded" << std::endl;
 
-    // Run tests
-    std::string testCommand = "./run_tests";
-    if (runTests(testCommand)) {
-        std::cout << "All tests passed!" << std::endl;
-    } else {
-        std::cout << "Tests failed!" << std::endl;
-        return 1;
-    }
+        if (runTests(testCommand)) {
+            std::cout << "Tests succeeded" << std::endl;
 
-    // Deploy project
-    std::string deployCommand = "scp build/project user@server:/var/www";
-    if (deployProject(deployCommand)) {
-        std::cout << "Deployment successful!" << std::endl;
+            if (deployProject(deployCommand)) {
+                std::cout << "Deployment succeeded" << std::endl;
+            } else {
+                std::cout << "Deployment failed" << std::endl;
+                return 1;
+            }
+        } else {
+            std::cout << "Tests failed" << std::endl;
+            return 1;
+        }
     } else {
-        std::cout << "Deployment failed!" << std::endl;
+        std::cout << "Build failed" << std::endl;
         return 1;
     }
 
