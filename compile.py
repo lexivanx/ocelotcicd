@@ -1,18 +1,18 @@
 import subprocess
 
-# Define source and header files
-source_files = ['build.cpp', 'test.cpp', 'deploy.cpp', 'main.cpp']
-header_files = ['build.h', 'test.h', 'deploy.h']
-output_file = 'ocelot_ci_cd'
+# Define the source and header files
+source_files = ['src/build.cpp', 'src/test.cpp', 'src/deploy.cpp', 'src/main.cpp']
+header_files = ['include/build.h', 'include/test.h', 'include/deploy.h']
+output_file = 'ci_cd_tool'
 
-# Define compiler and flags
+# Define the compiler and flags
 compiler = 'g++'
-compiler_flags = '-std=c++11 -o'
+compiler_flags = '-std=c++11 -Iinclude -o'
 
-# Construct compile command
+# Construct the compile command
 compile_command = f"{compiler} {compiler_flags} {output_file} {' '.join(source_files)}"
 
-# Execute compile command
+# Execute the compile command
 try:
     print(f"Compiling C++ files with command: {compile_command}")
     subprocess.run(compile_command, check=True, shell=True)
