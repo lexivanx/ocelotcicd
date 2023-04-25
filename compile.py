@@ -8,7 +8,7 @@ with open("config.json", "r") as config_file:
 # Define the source and header files
 source_files = ['src/build.cpp', 'src/test.cpp', 'src/deploy.cpp', 'src/main.cpp']
 header_files = ['include/build.h', 'include/test.h', 'include/deploy.h']
-output_file = 'ci_cd_tool'
+output_file = 'ocelot_ci_cd'
 
 # Define the compiler and flags
 compiler = 'g++'

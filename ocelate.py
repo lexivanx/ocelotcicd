@@ -8,9 +8,9 @@ def load_config():
     with open("config.json", "r") as config_file:
         return json.load(config_file)
 
-def execute_ci_cd_tool(command):
+def execute_ocelot(command):
     try:
-        subprocess.run(f"./ci_cd_tool {command}", check=True, shell=True)
+        subprocess.run(f"./ocelot_ci_cd {command}", check=True, shell=True)
         print(f"{command.capitalize()} completed successfully")
     except subprocess.CalledProcessError as e:
         print(f"{command.capitalize()} failed with error: {e}")
@@ -19,19 +19,19 @@ def build(args):
     if args.cpp:
         config = load_config()
         for command in config["buildCommands"]:
-            execute_ci_cd_tool(f"build {command}")
+            execute_ocelot(f"build {command}")
     else:
         print("No build option specified")
 
 def test(args):
     config = load_config()
     for command in config["testCommands"]:
-        execute_ci_cd_tool(f"test {command}")
+        execute_ocelot(f"test {command}")
 
 def deploy(args):
     config = load_config()
     for command in config["deployCommands"]:
-        execute_ci_cd_tool(f"deploy {command}")
+        execute_ocelot(f"deploy {command}")
 
 def main():
     parser = argparse.ArgumentParser(description="Ocelate - Lightweight CI/CD tool CLI")
