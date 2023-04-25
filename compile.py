@@ -1,4 +1,9 @@
+import json
 import subprocess
+
+# Load the config.json file
+with open("config.json", "r") as config_file:
+    config = json.load(config_file)
 
 # Define the source and header files
 source_files = ['src/build.cpp', 'src/test.cpp', 'src/deploy.cpp', 'src/main.cpp']
@@ -7,7 +12,7 @@ output_file = 'ci_cd_tool'
 
 # Define the compiler and flags
 compiler = 'g++'
-compiler_flags = '-std=c++11 -Iinclude -o'
+compiler_flags = '-std=c++11 -Iinclude -Ithird_party -o'
 
 # Construct the compile command
 compile_command = f"{compiler} {compiler_flags} {output_file} {' '.join(source_files)}"
