@@ -1,4 +1,4 @@
-# ocelotcicd
+# Ocelot CI/CD
 Lightweight CI/CD tool
 
 This CI/CD tool allows you to build, test, and deploy C++ projects using a simple command-line interface. The tool reads build, test, and deploy commands from a `config.json` file, making it easy to configure and customize the tool for different projects.
@@ -40,14 +40,21 @@ The `ocelate.py` script provides a command-line interface (CLI) for Ocelot CI/CD
 
 ## Building, Testing, and Deploying
 
-After configuring your `config.json` file, you can compile and run the Ocelot tool to build, test, and deploy your project:
+After configuring your `config.json` file, you can use the `compile.py` script to compile Ocelot CI/CD  and then run it to build, test, and deploy your project:
 
-```
-g++ -std=c++11 -I./third_party src/main.cpp src/build.cpp src/test.cpp src/deploy.cpp -o main
-./main
-```
+1. Compile Ocelot CI/CD tool using the `compile.py` script:
+    ```
+    python3 compile.py
+    ```
+    The `compile.py` script will load the `config.json` file, compile the source files with the appropriate flags, and create an executable named `ocelot_ci_cd`.
 
-This command will compile the source files and create an executable named `main`. Running `./main` will execute the Ocelot tool, which will read the `config.json` file and perform the build, test, and deploy steps according to the specified commands.
+2. Run Ocelot CI/CD:
+    ```
+    ./ocelot_ci_cd
+    ```
+    Running `./ocelot_ci_cd` will execute the tool, which will read the `config.json` file and perform the build, test, and deploy steps according to the specified commands.
+
+Remember to keep the `config.json` file in the same directory as the `ocelot_ci_cd` executable for the CI/CD tool to work properly.
 
 ## Customization
 
